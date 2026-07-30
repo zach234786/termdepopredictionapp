@@ -36,13 +36,12 @@ version the model was pickled with.
 | [streamlit_app.py](streamlit_app.py) | The app: layout, styling, both pages |
 | [app_utils.py](app_utils.py) | Input options and labels, value ranges, economic scenarios, and the feature engineering that turns form inputs into a model-ready row |
 | [bank_final_model.pkl](bank_final_model.pkl) | The trained, tuned decision tree |
-| [model_columns.pkl](model_columns.pkl) | Column order the model expects after one-hot encoding |
-| [app_metadata.json](app_metadata.json) | Evaluation results exported from the training notebook — metrics, confusion matrix, model comparison, feature importances, scenario rates |
+| [app_metadata.json](app_metadata.json) | Evaluation results exported from the training notebook — metrics, confusion matrix, model comparison, feature importances, scenario rates, and the column order the model expects after one-hot encoding |
 | [.streamlit/config.toml](.streamlit/config.toml) | Dark theme matching the app's styling |
 
-The `.pkl` files and `app_metadata.json` are produced by the training notebook
+The `.pkl` file and `app_metadata.json` are produced by the training notebook
 (`MLDP Codes Submission.ipynb`, kept with the coursework submission, not in this
-repo). If any of the three is missing the app fails with a readable message instead
+repo). If either is missing the app fails with a readable message instead
 of a traceback.
 
 ## The model
@@ -74,8 +73,8 @@ replacement for broader outreach.
 - `pdays` (days since last contact) uses `999` as a sentinel for "never contacted".
   It is replaced by an explicit `pdays_never_contacted` flag and a `pdays_bucket`
   category (`never` / `recent` / `medium` / `long_ago`), and the raw column is dropped.
-- Categorical fields are one-hot encoded and reindexed to `model_columns.pkl`, so the
-  feature row always matches the training layout.
+- Categorical fields are one-hot encoded and reindexed to the column order recorded
+  in `app_metadata.json`, so the feature row always matches the training layout.
 - `duration` (call length) is deliberately excluded — it is only known *after* a call
   happens, so including it would leak the answer.
 

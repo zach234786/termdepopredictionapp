@@ -9,7 +9,6 @@ from app_utils import (CATEGORIES, ECON_FEATURES, ECON_LABELS, LABELS, RANGES,
                        SCENARIO_HELP, SCENARIOS, build_feature_row)
 
 MODEL_PATH = 'bank_final_model.pkl'
-COLUMNS_PATH = 'model_columns.pkl'
 METADATA_PATH = 'app_metadata.json'
 
 ## Verdict colours. Kept in Python as well as CSS because the gauge stroke and
@@ -241,7 +240,7 @@ st.markdown("""
 
 @st.cache_resource
 def load_model():
-    return joblib.load(MODEL_PATH), joblib.load(COLUMNS_PATH)
+    return joblib.load(MODEL_PATH)
 
 
 @st.cache_data
@@ -256,7 +255,7 @@ def fail(message, detail):
     st.stop()
 
 
-missing = [p for p in (MODEL_PATH, COLUMNS_PATH, METADATA_PATH)
+missing = [p for p in (MODEL_PATH, METADATA_PATH)
            if not os.path.exists(p)]
 if missing:
     fail('Required files are missing: ' + ', '.join(f'`{m}`' for m in missing),
@@ -264,8 +263,9 @@ if missing:
          'files and the metadata, then copy them next to this script.')
 
 try:
-    model, model_columns = load_model()
+    model = load_model()
     meta = load_metadata()
+    model_columns = meta['model_columns']
 except Exception as exc:                                  ## noqa: BLE001
     fail('Could not load the model.', f'`{type(exc).__name__}: {exc}`')
 

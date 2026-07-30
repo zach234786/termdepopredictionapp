@@ -137,7 +137,7 @@ def build_feature_row(raw_inputs, model_columns):
         raise ValueError(
             'Feature columns do not match the trained model. '
             'This usually means the notebook was re-run with different features '
-            'but model_columns.pkl was not refreshed.'
+            'but app_metadata.json was not refreshed.'
         )
     if row.isna().any().any():
         bad = row.columns[row.isna().any()].tolist()
