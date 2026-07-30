@@ -260,8 +260,8 @@ missing = [p for p in (MODEL_PATH, COLUMNS_PATH, METADATA_PATH)
            if not os.path.exists(p)]
 if missing:
     fail('Required files are missing: ' + ', '.join(f'`{m}`' for m in missing),
-         'Run every cell in `MLDP Codes Submission.ipynb` to produce the model '
-         'files, then run `python make_app_metadata.py` to produce the metadata.')
+         'Run every cell in `MLDP Codes Submission.ipynb` to regenerate the model '
+         'files and the metadata, then copy them next to this script.')
 
 try:
     model, model_columns = load_model()
