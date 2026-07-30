@@ -48,7 +48,7 @@ st.markdown("""
     background-size: 46px 46px;
   }
 
-  .block-container { padding-top: 2.2rem; max-width: 1180px; }
+  .block-container { padding-top: 4.5rem; max-width: 1180px; }
 
   /* --- Page header ------------------------------------------------------- */
   .eyebrow { font-family: var(--mono); font-size: .72rem; letter-spacing: .19em;
